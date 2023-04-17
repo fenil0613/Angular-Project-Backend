@@ -1,7 +1,7 @@
 const Model = require("../../models/model");
 
 async function SearchListing(data) {
-  // console.log("Req body:", data.name)
+  console.log('IM SEARCHING')
   const newData = await Model.find({
     $or: [
       { name: { $regex: data.searchString, $options: "i" } },
@@ -15,6 +15,11 @@ async function SearchListing(data) {
     ],
   }).limit(1);
 
-  return newData;
+  const response = {
+    error: false,
+    newData,
+  };
+  //   console.log("con", response);
+  return response;
 }
 module.exports = SearchListing;
